@@ -9,5 +9,8 @@ migratedown:
 
 dropdb:
 	docker exec -it e-wallet-postgres-1 dropdb e_wallet
+
+sqlc:
+	sqlc generate
 	
-.PHONY: createdb migrateup migratedown dropdb
+.PHONY: createdb migrateup migratedown dropdb sqlc
