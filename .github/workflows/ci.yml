@@ -1,9 +1,10 @@
-name: ci-test
+name: server-ci-test
 
 on:
   push:
     paths:
       - "server/**"
+      - "!client/**"
     branches: [master]
   pull_request:
     branches: [master]
