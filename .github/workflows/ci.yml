@@ -2,9 +2,6 @@ name: server-ci-test
 
 on:
   push:
-    paths:
-      - "server/**"
-      - "!client/**"
     branches: [master]
   pull_request:
     branches: [master]
@@ -22,6 +19,8 @@ jobs:
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        with:
+          context: ./server
 
       - name: Test
         run: make test
