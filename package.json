@@ -4,8 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "docker-compose -f docker-compose.dev.yml up -d",
+    "start": "docker-compose -f docker-compose.dev.yml up -d && nodemon --exec go run main.go --signal SIGTERM",
     "build": "docker-compose -f docker-compose.dev.yml up --build",
     "stop": "docker-compose -f docker-compose.dev.yml down"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
