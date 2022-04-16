@@ -6,17 +6,16 @@ import (
 
 	"github.com/RoseNeezar/go-e-wallet/api"
 	db "github.com/RoseNeezar/go-e-wallet/db/sqlc"
+	"github.com/RoseNeezar/go-e-wallet/util"
 	_ "github.com/lib/pq"
 )
 
-const (
-	dbDriver      = "postgres"
-	dbSource      = "postgresql://postgres:postgres_password@localhost:5432/e_wallet?sslmode=disable"
-	serverAddress = "0.0.0.0:8080"
-)
 
 func main() {
-	conn, err := sql.Open(dbDriver, dbSource)
+ 
+	config, err := util.LoadConfig(".")	
+
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
@@ -24,7 +23,7 @@ func main() {
 
 	store := db.NewStore(conn)
 	server := api.NewServer(store)
-	err = server.Start(serverAddress)
+	err = server.Start(config.ServerAddress)
 
 	if err != nil {
 		log.Fatal("cannot start server:", err)
