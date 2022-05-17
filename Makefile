@@ -11,7 +11,7 @@ dropdb:
 	docker exec -it e-wallet_postgres_1 dropdb e_wallet
 
 sqlc:
-	sqlc generate
+	docker run --rm -v $(CURDIR):/src -w	/src kjconroy/sqlc generate
 
 test:
 	go test -v -cover ./...
